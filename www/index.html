@@ -1,0 +1,75 @@
+<!doctype html>
+
+<html>
+  <head>
+
+  </head>
+
+  <body>
+    <input type="text" id="robot-address" placeholder="Enter the robot's Internet address...">
+    <button type="button" id="robot-connect" class="btn">Connect to robot</button>
+    <button type="button" id="turn-left" class="btn">Turn Left</button>
+    <button type="button" id="turn-right" class="btn">Turn Right</button>
+    <input type="text" id="robot-connect-status" disabled>
+
+    <script src="js/jquery.js"></script>
+    <script src="socket.io/socket.io.js"></script>
+    <script>
+      (function (win, doc, undefined) {
+
+        var socket = '';
+        var robotReady = false;
+        var url = doc.URL;
+
+        function sendCommand (command) {
+          console.log('---sending command');
+          console.log(command);
+ 
+          socket.emit('robot command', { data: command });
+
+        }
+
+        function connectToRobot() {
+          var address = $('#robot-address').val();
+
+          console.log('---attempting to connect to robot');
+          console.log('@' + address);
+
+          socket = io.connect(address);
+
+          socket.on('robot status', function (data) {
+            var status = data.data;
+
+            if (status === 'server connected') {
+              console.log('---Successfully connected to robot');
+              $('#robot-connect-status').val('Connected to: ' + address);
+              robotReady = true;
+            }
+            else {
+              for (var key in status) {
+                newStatus = '<div>' + key + ' ' + status[key] + '</div>\n';
+              }
+            }
+          });
+
+          socket.on('log', function (data) {
+            var logData = data.data;
+          });
+        }
+
+        $(function() {
+          $('#robot-address').val(url);
+
+          $('#robot-connect').on('click', connectToRobot);          
+
+          $('#turn-left').on('click', function() {
+            sendCommand('manual-turn-left');
+          });
+
+          $('#turn-right').on('click', function() {
+            sendCommand('manual-turn-right');
+          });
+        });
+      }(window, document));
+    </script>
+</html>

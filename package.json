@@ -1,0 +1,33 @@
+{
+  "name": "onibot",
+  "version": "1.0.0",
+  "description": "telepresence robot build with johnny-five and node.js",
+  "main": "www/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/onenorth/onibot.git"
+  },
+  "keywords": [
+    "robot",
+    "telepresence",
+    "johnny-five",
+    "node",
+    "express",
+    "gpio"
+  ],
+  "author": "One North",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/onenorth/onibot/issues"
+  },
+  "homepage": "https://github.com/onenorth/onibot",
+  "dependencies": {
+    "express": "^4.12.1",
+    "johnny-five": "^0.8.44",
+    "raspi-io": "^2.2.2",
+    "socket.io": "^1.3.4"
+  }
+}

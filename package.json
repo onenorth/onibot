@@ -4,7 +4,7 @@
   "description": "telepresence robot build with johnny-five and node.js",
   "main": "www/server.js",
   "scripts": {
-    "start": "forever start www/server.js"
+    "start": "./node_modules/forever/bin/forever start www/server.js"
   },
   "repository": {
     "type": "git",
@@ -12,6 +12,7 @@
   },
   "keywords": [
     "robot",
+
     "telepresence",
     "johnny-five",
     "node",

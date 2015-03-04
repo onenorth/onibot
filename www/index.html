@@ -1,17 +1,38 @@
 <!doctype html>
 
-<html>
+<html lang="en-US">
   <head>
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="css/main.css" rel="stylesheet">
   </head>
 
   <body>
-    <input type="text" id="robot-address" placeholder="Enter the robot's Internet address...">
-    <button type="button" id="robot-connect" class="btn">Connect to robot</button>
+    <div class="page">
+	<header>
+          <h1 class="">Tobino</h1>
+        </header>
+    <div class="group">
+      <div class="field field--inline">
+        <label class="field-label">Robot IP Address:
+          <div class="button-field">
+            <input class="field-text field-text--wide button-field__text" id="robot-address" type="text" placeholder="Enter the robot's Internet address...">
+            <button class="btn btn--primary button-field__button" id="robot-connect" type="button">Connect to robot</button>
+          </div>
+        </label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="field-label">Connection Status:
+        <div class="status-field">
+          <input class="field-text field-text--wide" id="robot-connect-status" type="text" disabled placeholder="Not connected">
+          <span class="connection-status">☺</span>
+        </div>
+      </label>
+    </div>
     <button type="button" id="turn-left" class="btn">Turn Left</button>
     <button type="button" id="turn-right" class="btn">Turn Right</button>
-    <input type="text" id="robot-connect-status" disabled>
-
+    </div>
     <script src="js/jquery.js"></script>
     <script src="socket.io/socket.io.js"></script>
     <script>
@@ -42,7 +63,9 @@
 
             if (status === 'server connected') {
               console.log('---Successfully connected to robot');
-              $('#robot-connect-status').val('Connected to: ' + address);
+              $('#robot-connect-status')
+                .val('Connected to: ' + address)
+                .toggleClass('is-connected');
               robotReady = true;
             }
             else {

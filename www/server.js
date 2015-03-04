@@ -8,7 +8,7 @@ var io = require('socket.io')(http);
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 var serverStatus = {
   hasArduino: false,
@@ -16,7 +16,8 @@ var serverStatus = {
   currentAI: 'none'
 };
 
-http.listen(80, function() {
+// listen on port 3000 - we use port-forwarding to forward inbound 80 -> 3000
+http.listen(3000, function() {
    console.log('Starting server, listening on *:80');
 });
 

@@ -32,6 +32,7 @@
     </div>
     <button type="button" id="turn-left" class="btn">Turn Left</button>
     <button type="button" id="turn-right" class="btn">Turn Right</button>
+    <button type="button" id="strobe-led" class="btn">Strobe Led</button>
     </div>
     <script src="js/jquery.js"></script>
     <script src="socket.io/socket.io.js"></script>
@@ -91,6 +92,10 @@
 
           $('#turn-right').on('click', function() {
             sendCommand('manual-turn-right');
+          });
+
+          $('#strobe-led').on('click', function() {
+            sendCommand('manual-led-strobe-300');
           });
         });
       }(window, document));
